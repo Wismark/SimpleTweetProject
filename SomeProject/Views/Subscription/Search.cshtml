@@ -1,0 +1,33 @@
+﻿@model IEnumerable<SomeProject.Models.User>
+
+@{
+    ViewBag.Title = "Searched Users";
+}
+
+<h6 class="col-5 ">Search resuts:</h6>
+
+<div class="container">
+    @if (Model.ToList().Count() != 0)
+    {
+        foreach (var item in Model)
+        {
+            <div class="row m-2">
+                <div class="col-2 text-body border text-center">
+                    <strong> @item.UserName </strong>
+                </div>
+                <div class="col-2">
+                    @Ajax.ActionLink("Read", "Subscribe", "Subscription",
+                     new { s = item.UserName },
+                     new AjaxOptions { UpdateTargetId = item.UserName, OnSuccess = "ConfirmSub" },
+                          new { @class = "btn btn-primary m-1", @id = item.UserName })
+
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <h5>Sorry! There's no unread users yet...</h5>
+    }
+</div>
+@*  <input id="@item.UserName" type="submit" value="Subscribe" class="btn btn-primary" /> *@

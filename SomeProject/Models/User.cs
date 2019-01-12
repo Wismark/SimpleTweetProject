@@ -15,6 +15,15 @@ namespace SomeProject.Models
         public int RoleId { get; set; }
         public Role Role { get; set; }
 
+        public virtual ICollection<User> ReadList { get; set; }
+        public virtual ICollection<Tweet> Tweets { get; set; } 
+        public User()
+        {
+            Tweets = new List<Tweet>();
+            ReadList = new HashSet<User>();
+        }
+        
+
     }
 
     public class Role
@@ -22,4 +31,9 @@ namespace SomeProject.Models
         public int Id { get; set; }
         public string Name { get; set; }
     }
+
+    //public class SubItem
+    //{
+    //    public int Id { get; set; }
+    //}
 }
