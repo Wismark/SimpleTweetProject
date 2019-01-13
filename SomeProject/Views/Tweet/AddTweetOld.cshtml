@@ -1,0 +1,15 @@
+﻿@model SomeProject.Models.Tweet
+
+@{
+    ViewBag.Title = "Add_Tweet";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <h4> <strong>Add new tweet:</strong> </h4>
+    @Html.TextAreaFor(model => model.Content, new { @class = "textarea", style = "font-size: medium; font-weight: bold; width:600px; height: 200px; resize:none" })
+    <p>
+        <input class="btn btn-primary btn-sm" type="submit" value="Add" />
+    </p>
+}

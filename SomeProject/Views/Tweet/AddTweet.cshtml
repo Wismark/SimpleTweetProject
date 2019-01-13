@@ -1,18 +1,14 @@
 ﻿@model SomeProject.Models.Tweet
 
-@{
-    ViewBag.Title = "Add_Tweet";
-}
-
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    <h4> <strong>Add new tweet:</strong> </h4>
-    @Html.TextAreaFor(model => model.Content, new { @class = "textarea", style = "font-size: medium; font-weight: bold; width:600px; height: 200px; resize:none" })
-    <p>
-        <input class="btn btn-primary btn-sm" type="submit" value="Add" />
-    </p>
-}
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
-<script src="~/Scripts/jquery.validate.min.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<div class="panel-body border-bottom" id="AjaxTweet">
+    <div class="media p-1">
+        <a class="media-left mx-2" href="#fake">
+            <img alt="" class="media-object img-rounded" src="https://pickaface.net/gallery/avatar/Identical52046a933b5e3.png" width="65" height="65">
+        </a>
+        <div class="media-body">
+            <h4 class="media-heading" href="#">@Model.User.UserName</h4>
+            <p>@Model.Content</p>
+        </div>
+    </div>
+    <h7 class="ml-2">Publish date: @Model.Publish_date</h7>
+</div>

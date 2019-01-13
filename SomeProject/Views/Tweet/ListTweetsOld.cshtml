@@ -1,0 +1,82 @@
+﻿@model IEnumerable<SomeProject.Models.Tweet>
+
+@{
+    ViewBag.Title = "ListTweets";
+}
+
+<div class="container">
+    <div class="row col-4 border-dark">
+        <div class="col-sm m-2">
+            @Html.ActionLink("Add Tweet", "AddTweet", "Tweet",
+                     new { returnUrl = Request.Url.PathAndQuery },
+                     new { @class = "btn btn-primary m-1" })
+        </div>
+        <div class="col-sm m-2">
+            @Html.ActionLink("Logout", "Logoff", "Account",
+                         new { returnUrl = Request.Url.PathAndQuery },
+                         new { @class = "btn btn-primary m-1" } )
+        </div>
+    </div>
+</div>
+
+    <h2 class="form-text">Hey @ViewBag.UserName, here's your tweets:</h2>
+
+    @foreach (var item in Model)
+    {
+        <div class="card col-5 m-4 bg-info">
+            <div class="card-header m-1 p-0">
+                <h3> Author - @item.User.UserName</h3>
+            </div>
+            <div class="card-body bg-light">
+                <h4>@item.Content</h4>
+            </div>
+            <div class="card-footer m-1 p-1">
+                <h7>Publish date: @item.Publish_date</h7>
+            </div>
+        </div>
+    }
+    @*
+        @using (Ajax.BeginForm("JsonSearch", "Subscription", new AjaxOptions
+        {
+            OnSuccess = "OnSuccess",
+
+        }))
+        {
+            <input type="text" name="SearchString" style="width:275px;" />
+            <input type="submit" style="font-weight:bold;" value="Search" />
+        }
+    *@
+
+    <div class="col-5">
+        <input id="SearchStr" name="SearchString" value="" style="width:275px;" />
+        <input id="submit" name="submit" type="submit" style="font-weight:bold;" value="Search" />
+    </div>
+
+    <div id="results"></div>
+
+
+    <h3>@ViewBag.num</h3>
+
+    @section scripts{
+        <script type="text/javascript">
+        function OnSuccess(data) {
+            $('#results').empty(); //очистить элемент
+            for (var i = 0; i < data.length; i++) {
+                $('#results').append('<p>' + data[i].UserName + '<p>');
+            } }
+
+            function ConfirmSub(data) {
+                $(data).empty(); 
+            }
+
+         $(document).ready(function () {
+            $('#submit').click(function (e) {
+                e.preventDefault();
+                var info = $('#SearchStr').val();
+                info = encodeURIComponent(info);
+                $('#results').load('@Url.Action("Search", "Subscription")?SearchStr=' + info);
+            });
+         });
+    
+        </script>
+    }

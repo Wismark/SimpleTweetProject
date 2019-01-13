@@ -26,32 +26,28 @@ namespace SomeProject.Controllers
                 }
 
                 if (tweets != null)
-                    return View(tweets.OrderBy(t => t.Publish_date));
+                    return View(tweets.OrderByDescending(t => t.Publish_date));
                 else return View(tweets);
             }
             return RedirectToAction("Login", "Account");
         }
 
-        [Authorize]
-        [HttpGet]
-        public ActionResult AddTweet()
-        {
-            return View();
-        }
 
         [Authorize]
-        [HttpPost]
-        public ActionResult AddTweet(Tweet tweet)
+        public ActionResult AddTweet(string content)
         {
-            if(ModelState.IsValid && User.Identity.IsAuthenticated)
+            if(ModelState.IsValid && User.Identity.IsAuthenticated && content!=null)
             {
+                Tweet tweet = new Tweet();
+                tweet.Content = content;
                 tweet.Publish_date = DateTime.Now;
                 tweet.Author_id = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault().Id;
                 db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault().Tweets.Add(tweet);
                 db.Tweets.Add(tweet);
                 db.SaveChanges();
-            }
-            return RedirectToAction("ListTweets");
+                return PartialView(tweet);
+            }           
+            return new EmptyResult();
         }
     }
 }
