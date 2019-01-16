@@ -39,6 +39,7 @@ namespace SomeProject.Controllers
         {
             if(ModelState.IsValid && User.Identity.IsAuthenticated && content!=null)
             {
+                ViewBag.UserName = User.Identity.Name;
                 Tweet tweet = new Tweet();
                 tweet.Content = content;
                 tweet.Publish_date = DateTime.Now;
@@ -57,20 +58,29 @@ namespace SomeProject.Controllers
             ViewBag.UserName = User.Identity.Name;
             User user = db.Users.Where(u => u.UserName == UserName).SingleOrDefault();
             IEnumerable<Tweet> tweets = new List<Tweet>();
-            if ( user!=null)
+            if (user != null)
             {
-                if(user.UserName == User.Identity.Name)
-                {
-                    return RedirectToAction("ListTweets");
-                }
-                else
-                {
-                    tweets = user.Tweets;
-                    return View(tweets);
-                }
+                tweets = user.Tweets;
+                return View(tweets);
             }
-            
+
             return RedirectToAction("ListTweets");
+        }
+
+        
+        [Authorize]
+        public ActionResult DeleteTweet(int tweetId)
+        {
+            Tweet tweet = new Tweet();
+            tweet = db.Tweets.Where(t => t.Id == tweetId).SingleOrDefault();
+            if(tweet!=null)
+            {
+                int id = tweet.Id;
+                db.Tweets.Remove(tweet);
+                db.SaveChanges();
+                return Json(new { success = true, tweetId = id }, JsonRequestBehavior.AllowGet);
+            }
+            return new EmptyResult();
         }
     }
 }

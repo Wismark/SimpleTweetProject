@@ -1,16 +1,27 @@
 ﻿@model SomeProject.Models.Tweet
 
 <div id="PartialTweet">
-    <div class="panel-body border-bottom" id="AjaxTweet">
+    <div class="panel-body border-bottom">
         <div class="media p-1">
             <a class="media-left mx-2" href="#fake">
                 <img alt="" class="media-object img-rounded" src="https://pickaface.net/gallery/avatar/Identical52046a933b5e3.png" width="65" height="65">
             </a>
             <div class="media-body">
-                <h4 class="media-heading" href="#">@Model.User.UserName</h4>
+                <h4 class="media-heading" href="#">
+                    @Html.ActionLink(Model.User.UserName.ToString(), "GetUserTweets", "Tweet",
+                     new { UserName = Model.User.UserName }, null)
+                </h4>
                 <p>@Model.Content</p>
             </div>
+            @if (Model.User.UserName == ViewBag.UserName || ViewBag.UserName == "admin")
+            {
+                <button class="btn btn-outline-secondary btn-sm border-0"
+                        id="DeleteTweet" value=@Model>
+                    x
+                </button>
+            }
         </div>
         <h7 class="ml-2">Publish date: @Model.Publish_date</h7>
     </div>
 </div>
+

@@ -11,7 +11,9 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-        <a class="navbar-text" href=@Url.Action("ListTweets")>Home</a>
+        <a class="navbar-brand ">
+            @Html.ActionLink("Home", "ListTweets")
+        </a>
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0 border-bottom">
             <li class="mt-2 ml-2">
                 <a class="card-text"><strong>Hey, @ViewBag.UserName</strong> </a>
