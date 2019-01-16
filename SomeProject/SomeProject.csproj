@@ -170,6 +170,7 @@
     <Content Include="Views\Tweet\View.cshtml" />
     <Content Include="Views\Tweet\ListTweets.cshtml" />
     <Content Include="Views\Tweet\AddTweet.cshtml" />
+    <Content Include="Views\Tweet\GetUserTweets.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

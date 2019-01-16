@@ -1,14 +1,16 @@
 ﻿@model SomeProject.Models.Tweet
 
-<div class="panel-body border-bottom" id="AjaxTweet">
-    <div class="media p-1">
-        <a class="media-left mx-2" href="#fake">
-            <img alt="" class="media-object img-rounded" src="https://pickaface.net/gallery/avatar/Identical52046a933b5e3.png" width="65" height="65">
-        </a>
-        <div class="media-body">
-            <h4 class="media-heading" href="#">@Model.User.UserName</h4>
-            <p>@Model.Content</p>
+<div id="PartialTweet">
+    <div class="panel-body border-bottom" id="AjaxTweet">
+        <div class="media p-1">
+            <a class="media-left mx-2" href="#fake">
+                <img alt="" class="media-object img-rounded" src="https://pickaface.net/gallery/avatar/Identical52046a933b5e3.png" width="65" height="65">
+            </a>
+            <div class="media-body">
+                <h4 class="media-heading" href="#">@Model.User.UserName</h4>
+                <p>@Model.Content</p>
+            </div>
         </div>
+        <h7 class="ml-2">Publish date: @Model.Publish_date</h7>
     </div>
-    <h7 class="ml-2">Publish date: @Model.Publish_date</h7>
 </div>

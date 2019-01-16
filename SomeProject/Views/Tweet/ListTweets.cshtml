@@ -11,154 +11,175 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-        @*<a class="navbar-text" href=@Url.Action("ListTweets")>Home</a>*@
-        <ul class="navbar-nav mr-auto mt-2 mt-lg-0 border-bottom">
-            <li class="mt-2 ml-2">
-                <a class="card-text"><strong>Hey, @ViewBag.UserName</strong> </a>
-                <img alt="" class="media-object img-rounded mx-2 mb-2" src="https://pickaface.net/gallery/avatar/Identical52046a933b5e3.png" width="35" height="35">
-            </li>
-            <li class="nav-item active mt-1">
-                @Html.ActionLink("Logout", "Logoff", "Account",
-                         new { returnUrl = Request.Url.PathAndQuery },
-                         new { @class = "btn btn-primary m-1" } )
-            </li>
-        </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
-        </form>
-    </div>
+        @*<a class="btn btn-primary m-1" href=@Url.Action("ListTweets")>Home</a>*@
+        @Html.ActionLink("Home","ListTweets")
+       <ul class="navbar-nav mr-auto mt-2 mt-lg-0 border-bottom">
+           <li class="mt-2 ml-2">
+               <a class="card-text"><strong>Hey, @ViewBag.UserName</strong> </a>
+               <img alt="" class="media-object img-rounded mx-2 mb-2" src="https://pickaface.net/gallery/avatar/Identical52046a933b5e3.png" width="35" height="35">
+           </li>
+           <li class="nav-item active mt-1">
+               @Html.ActionLink("Logout", "Logoff", "Account",
+                        new { returnUrl = Request.Url.PathAndQuery },
+                        new { @class = "btn btn-primary m-1" } )
+           </li>
+       </ul>
+       <form class="form-inline my-2 my-lg-0">
+           <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+           <button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
+       </form>
+   </div>
 </nav>
 
 <div class="container py-4">
-    <div class="row">
-        <div class="col-sm-2 bg-white">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <a href="#"></a>
-                    <div class="row">
+   <div class="row">
+       <div class="col-sm-2 bg-white">
+           <div class="panel panel-default">
+               <div class="panel-body">
+                   <a href="#"></a>
+                   <div class="row">
+                   </div>
+               </div>
+           </div>
+
+           <div class="panel panel-default panel-custom col-sm-2 p-2 ml-2">
+               <div class="panel-heading">
+                   <h3 class="panel-title">
+                       Trends:
+                   </h3>
+               </div>
+
+               <div class="panel-body">
+                   <ul class="list-unstyled">
+                       <li><a href="#">#NewTwitter</a></li>
+                       <li><a href="#">#SharijPresident</a></li>
+                       <li><a href="#">#Doka2</a></li>
+                       <li><a href="#">#memes</a></li>
+                   </ul>
+               </div>
+           </div>
+       </div>
+       <div class="col-sm-7">
+           <div class="panel panel-info bg-white border-0">
+               <div class="panel-heading border-bottom mb-3">
+                   <div class="media">
+                       <a class="media-left ml-2 mt-3" href="#fake">
+                           <img alt="" class="media-object img-rounded" src="https://pickaface.net/gallery/avatar/Identical52046a933b5e3.png" width="35" height="35">
+                       </a>
+                       <div class="media-body m-2 p-1">
+
+                           <textarea class="form-control" rows="1" id="tweet" style="resize:none"></textarea>
+
+                           <button class="btn btn-primary btn-sm mt-2" id="AddTweet">Add tweet</button>
+                       </div>
+
+                   </div>
+               </div>
+               <script id="iframeinserter" src=".."></script>
+
+        @***************************************************************@
+
+        <div id="results"></div>
+        @foreach(var item in Model)
+        {
+            <div class="panel-body border-bottom">
+                <div class="media p-1">
+                    <a class="media-left mx-2" href="#fake">
+                        <img alt = "" class="media-object img-rounded" src="https://pickaface.net/gallery/avatar/Identical52046a933b5e3.png" width="65" height="65">
+                    </a>
+                    <div class="media-body">
+                        <h4 class="media-heading" href="#">
+                            @Html.ActionLink(item.User.UserName.ToString(), "GetUserTweets", "Tweet",
+                             new { UserName = item.User.UserName }, null)
+                        </h4>
+                        <p>@item.Content</p>
                     </div>
                 </div>
+                <h7 class="ml-2">Publish date: @item.Publish_date</h7>
             </div>
+        }
+    </div>
+    <br>
+    <br>
+    <br>
+</div>
 
-            <div class="panel panel-default panel-custom col-sm-2 p-2 ml-2">
-                <div class="panel-heading">
-                    <h3 class="panel-title">
-                        Trends:
-                    </h3>
-                </div>
-
-                <div class="panel-body">
-                    <ul class="list-unstyled">
-                        <li><a href="#">#NewTwitter</a></li>
-                        <li><a href="#">#SharijPresident</a></li>
-                        <li><a href="#">#Doka2</a></li>
-                        <li><a href="#">#memes</a></li>
-                    </ul>
-                </div>
-            </div>
+<div class="col-sm-3">
+    <div class="panel panel-default panel-custom bg-white">
+        <div class="panel-heading m-2">
+            <h3 class="panel-title">
+                Who to follow:
+            </h3>
         </div>
-        <div class="col-sm-7">
-            <div class="panel panel-info bg-white border-0">
-                <div class="panel-heading border-bottom mb-3">
-                    <div class="media">
-                        <a class="media-left ml-2 mt-3" href="#fake">
-                            <img alt="" class="media-object img-rounded" src="https://pickaface.net/gallery/avatar/Identical52046a933b5e3.png" width="35" height="35">
+        <div class="panel-body m-2 border-danger mb-2">
+            <div class="media border-bottom mb-2">
+                <div class="media-left">
+                    <img src = "http://placehold.it/32x32" alt="" class="media-object img-rounded">
+                </div>
+                <div class="media-body">
+                    <h5 class="media-heading pl-2"> John Doe</h5>
+                    <div class="mb-1 pl-4">
+                        <a href = "#" class="btn btn-outline-primary btn-sm ">
+                            +
+                            <span class="glyphicon glyphicon-user"></span>
+                            Read
                         </a>
-                        <div class="media-body m-2 p-1">
-
-                            <textarea class="form-control" rows="1" id="tweet" style="resize:none"></textarea>
-
-                            <button class="btn btn-primary btn-sm mt-2" id="AddTweet">Add tweet</button>
-                        </div>
-
-                    </div>
-                </div>
-                <script id="iframeinserter" src=".."></script>
-
-                @***************************************************************@
-
-                <div id="results"></div>
-                @foreach (var item in Model)
-                {
-                    <div class="panel-body border-bottom">
-                        <div class="media p-1">
-                            <a class="media-left mx-2" href="#fake">
-                                <img alt="" class="media-object img-rounded" src="https://pickaface.net/gallery/avatar/Identical52046a933b5e3.png" width="65" height="65">
-                            </a>
-                            <div class="media-body">
-                                <h4 class="media-heading" href="#">@item.User.UserName</h4>
-                                <p>@item.Content</p>
-                            </div>
-                        </div>
-                        <h7 class="ml-2">Publish date: @item.Publish_date</h7>
-                    </div>
-                }
-            </div>
-            <br>
-            <br>
-            <br>
-        </div>
-
-        <div class="col-sm-3">
-            <div class="panel panel-default panel-custom bg-white">
-                <div class="panel-heading m-2">
-                    <h3 class="panel-title">
-                        Who to follow:
-                    </h3>
-                </div>
-                <div class="panel-body m-2 border-danger mb-2">
-                    <div class="media border-bottom mb-2">
-                        <div class="media-left">
-                            <img src="http://placehold.it/32x32" alt="" class="media-object img-rounded">
-                        </div>
-                        <div class="media-body">
-                            <h5 class="media-heading pl-2"> John Doe</h5>
-                            <div class="mb-1 pl-4">
-                                <a href="#" class="btn btn-outline-primary btn-sm ">
-                                    +
-                                    <span class="glyphicon glyphicon-user"></span>
-                                    Read
-                                </a>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+</div>
+</div>
 
 
-@section scripts{
-    <script type="text/javascript">
-        function OnSuccess(data) {
-            $('#results').empty(); //очистить элемент
-            for (var i = 0; i < data.length; i++) {
-                $('#results').append('<p>' + data[i].UserName + '<p>');
-            } }
+@section scripts
+{
+<script type="text/javascript">
+function OnSuccess(data) {
+    $('#results').empty(); //очистить элемент
+for (var i = 0; i < data.length; i++)
+{
+        $('#results').append('<p>' + data[i].UserName + '<p>');
+}
+}
 
-            function ConfirmSub(data) {
-                $(data).empty();
-            }
+function ConfirmSub(data) {
+        $(data).empty();
+}
 
     @*     $(document).ready(function () {
-            $('#submit').click(function (e) {
-                e.preventDefault();
-                var info = $('#SearchStr').val();
-                info = encodeURIComponent(info);
-                $('#results').load('@Url.Action("Search", "Subscription")?SearchStr=' + info);
-            });
-        }); *@
+        $('#submit').click(function (e) {
+            e.preventDefault();
+            var info = $('#SearchStr').val();
+            info = encodeURIComponent(info);
+            $('#results').load('@Url.Action("Search", "Subscription")?SearchStr=' + info);
+        });
+    }); *@
 
-          $(document).ready(function () {
-            $('#AddTweet').click(function (e) {
+    @*$(document).ready(function () {
+       $('#AddTweet').click(function (e) {
+           e.preventDefault();
+           var info = $('#tweet').val();
+           info = encodeURIComponent(info);
+           $('#results').load('@Url.Action("AddTweet", "Tweet")?content=' + info);
+       });
+    });*@
+
+        $(document).ready(function () {
+            $('#AddTweet').click(function(e) {
                 e.preventDefault();
                 var info = $('#tweet').val();
-                info = encodeURIComponent(info);                                 
-                $('#results').load('@Url.Action("AddTweet", "Tweet")?content=' + info);
+                $('#tweet').empty();
+                info = encodeURIComponent(info);
+                var url = '@Url.Action("AddTweet", "Tweet")?content=' + info;
+                $.get(url, null, function(data) {
+                    $('#results').prepend(data);
+                }, 'html').error(function(error) {
+                    alert(error);
+                });
             });
-         });
-
-    </script>
-}
+        });
+        </script>
+        }

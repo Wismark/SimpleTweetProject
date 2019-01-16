@@ -10,6 +10,7 @@ namespace SomeProject.Controllers
     public class TweetController : Controller
     {
         private Tweet_Context db = new Tweet_Context();
+
         public ActionResult ListTweets()
         {
             if (User.Identity.IsAuthenticated)
@@ -48,6 +49,28 @@ namespace SomeProject.Controllers
                 return PartialView(tweet);
             }           
             return new EmptyResult();
+        }
+
+        [Authorize]
+        public ActionResult GetUserTweets(string UserName) //By name
+        {
+            ViewBag.UserName = User.Identity.Name;
+            User user = db.Users.Where(u => u.UserName == UserName).SingleOrDefault();
+            IEnumerable<Tweet> tweets = new List<Tweet>();
+            if ( user!=null)
+            {
+                if(user.UserName == User.Identity.Name)
+                {
+                    return RedirectToAction("ListTweets");
+                }
+                else
+                {
+                    tweets = user.Tweets;
+                    return View(tweets);
+                }
+            }
+            
+            return RedirectToAction("ListTweets");
         }
     }
 }
