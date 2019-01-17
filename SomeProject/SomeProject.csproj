@@ -162,8 +162,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\Tweet\ListTweetsOld.cshtml" />
-    <Content Include="Views\Tweet\AddTweetOld.cshtml" />
     <Content Include="Views\Subscription\Search.cshtml" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />

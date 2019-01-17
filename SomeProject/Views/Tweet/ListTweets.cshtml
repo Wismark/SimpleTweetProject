@@ -170,7 +170,7 @@ function ConfirmSub(data) {
     });*@
 
         $(document).ready(function () {
-            $('#AddTweet').click(function(e) {
+            $(document).on('click', '#AddTweet',function(e) {
                 e.preventDefault();
                 var info = $('#tweet').val();
                 $('#tweet').val("");
@@ -183,7 +183,7 @@ function ConfirmSub(data) {
     });
 
         $(document).ready(function () {
-            $('#DeleteTweet').click(function (e) {
+            $(document).on('click', '#DeleteTweet', function(e){
                 e.preventDefault();
                 var info = $('#DeleteTweet').val();
                 info = encodeURIComponent(info);

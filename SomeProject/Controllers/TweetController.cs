@@ -61,7 +61,7 @@ namespace SomeProject.Controllers
             if (user != null)
             {
                 tweets = user.Tweets;
-                return View(tweets);
+                return View(tweets.OrderByDescending(t => t.Publish_date));
             }
 
             return RedirectToAction("ListTweets");

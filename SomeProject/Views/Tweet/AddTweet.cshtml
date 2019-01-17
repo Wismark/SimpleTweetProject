@@ -16,7 +16,7 @@
             @if (Model.User.UserName == ViewBag.UserName || ViewBag.UserName == "admin")
             {
                 <button class="btn btn-outline-secondary btn-sm border-0"
-                        id="DeleteTweet" value=@Model>
+                        id="DeleteTweet" value=@Model.Id>
                     x
                 </button>
             }
